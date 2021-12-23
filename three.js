@@ -15,11 +15,14 @@ light.position.set(0, 0, 6)
 scene.add(light)
 
 const loader = new THREE.TextureLoader()
+loader.setCrossOrigin("anonymous");
+const triganTexture = loader.load('images/TriganLogoBlackLarge.png')
 
+/*
 const materials = [
-    'trigan-logo.png', 
-    'trigan-logo.png', 
-    'trigan-logo.png'
+    sideMaterial = (color= 0x000000), 
+    'images/trigan-logo.png', 
+    'images/trigan-logo.png'
 ]
 
 const mapMaterial = materials.map(url => {
@@ -27,12 +30,12 @@ const mapMaterial = materials.map(url => {
         map: loader.load(materials)
     })
 })
-
-const geometry = new THREE.CylinderGeometry(5, 5, 0.5, 32);
+*/
+const geometry = new THREE.CylinderGeometry(2, 2, 0.5, 32);
 const material = new THREE.MeshLambertMaterial( { 
-    color: 0x2727e6 
+    map: triganTexture 
 } );
-const cylinder = new THREE.Mesh( geometry, materials );
+const cylinder = new THREE.Mesh( geometry, material );
 scene.add( cylinder );
 
 camera.position.z = 15;
@@ -45,8 +48,8 @@ function animate() {
 
     currentTimeline += (aimTimeline - currentTimeline) * 0.1
 
-    const rx = currentTimeline * Math.PI * 2
-    const ry = (currentTimeline * 0.9 + 0.1) * Math.PI * 1
+    const rx = currentTimeline * Math.PI * 3
+    const ry = (currentTimeline * 0.6 + 0.4) * Math.PI * 1
 
     cylinder.rotation.set(rx, ry, 0)
 
