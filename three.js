@@ -18,7 +18,7 @@ const loader = new THREE.TextureLoader()
 
 const geometry = new THREE.BoxGeometry(3.5, 5, 0.5);
 const material = new THREE.MeshLambertMaterial( { 
-    map: loader.load("Trigan-logo-small.svg") 
+    color: 0x2727e6 
 } );
 const cube = new THREE.Mesh( geometry, material );
 scene.add( cube );
