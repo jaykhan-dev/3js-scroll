@@ -16,14 +16,26 @@ scene.add(light)
 
 const loader = new THREE.TextureLoader()
 
-const geometry = new THREE.BoxGeometry(3.5, 5, 0.5);
+const materials = [
+    'trigan-logo.png', 
+    'trigan-logo.png', 
+    'trigan-logo.png'
+]
+
+const mapMaterial = materials.map(url => {
+    return new THREE.MeshLambertMaterial({
+        map: loader.load(materials)
+    })
+})
+
+const geometry = new THREE.CylinderGeometry(5, 5, 0.5, 32);
 const material = new THREE.MeshLambertMaterial( { 
     color: 0x2727e6 
 } );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
+const cylinder = new THREE.Mesh( geometry, materials );
+scene.add( cylinder );
 
-camera.position.z = 6;
+camera.position.z = 15;
 
 let currentTimeline = window.pageYOffset / 3000
 let aimTimeline = window.pageYOffset / 3000
@@ -33,10 +45,10 @@ function animate() {
 
     currentTimeline += (aimTimeline - currentTimeline) * 0.1
 
-    const rx = currentTimeline * -0.5 + 0.5
-    const ry = (currentTimeline * 0.9 + 0.1) * Math.PI * 2
+    const rx = currentTimeline * Math.PI * 2
+    const ry = (currentTimeline * 0.9 + 0.1) * Math.PI * 1
 
-    cube.rotation.set(rx, ry, 0)
+    cylinder.rotation.set(rx, ry, 0)
 
 	renderer.render( scene, camera );
 }
